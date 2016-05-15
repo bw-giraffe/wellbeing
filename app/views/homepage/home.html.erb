@@ -44,11 +44,27 @@
         	console.log("done playing");
         	var statusLevel = 2;
         	// var statusLevel = simulation.checkWellbeing(wellbeing);
-        	statVideoRequest(statusLevel);
-        	//ajax request    
-        	
+        	// var newUrl = statVideoRequest(statusLevel);
+        	// //ajax request   
+        	$.ajax({
+				type: "GET",
+				url: "statuses",
+				dataType: "json",
+				data: {
+					statusLevel: 2
+				}, 
+				success: function (res) {
+					console.log("SUCCESS", res);
+					var url = res["url"]
+					player.loadVideoById(url);
+				},
+				error: function (err) {
+					console.log("ERROR", err);
+				}
+			});
+        	// console.log("newUrl", newUrl); 
+        	// player.loadVideoById(newUrl);
         	//this is what loads a new video
-        	player.loadVideoById("BU6dAAfg-qk");
    		 }
    	}
 
@@ -215,7 +231,8 @@
 			}, 
 			success: function (res) {
 				console.log("SUCCESS", res);
-
+				var url = res["url"]
+				return url;
 			},
 			error: function (err) {
 				console.log("ERROR", err);
