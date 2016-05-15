@@ -1,7 +1,17 @@
+<style>
+#outer{
+	width: 100%;
+  	text-align: center;
+}
+#player{
+	display: inline-block;
+
+}
+</style>
 <h1>Be Well</h1>
-
-<div id="player" data-status="true"></div>
-
+<div id="outer">
+	<div id="player" data-status="true"></div>
+</div>
 <script>
 
 	var player;
@@ -9,7 +19,7 @@
         player = new YT.Player('player', {
           height: '400',
           width: '600',
-          videoId: 'EKymvBM6Udc', //starting video
+          videoId: 'EVdPt36x6Hw', //starting video
           playerVars: {
           	'autoplay': 0,
           	'controls': 0,
@@ -36,6 +46,7 @@
 
         if(event.data === 0) {  
         	console.log("done playing");
+        	console.log("YOUR WELLBEING IS ", wellbeing);
         	var lvl = simulation.checkWellbeing(wellbeing);
         	console.log("lvl", lvl);
         	// //ajax request   
@@ -76,11 +87,10 @@
     	wellbeingDecay: function() {
     		// console.log("checking the wellbeing, y'all");
     		interval = setTimeout(simulation.wellbeingDecay, simulation.timeAmt);
-    		if(interrupt) {
-    			wellbeing = wellbeing - 5;
-    			// console.log("current wellbeing", wellbeing);
-    		}
-    		simulation.checkWellbeing(wellbeing);
+    		wellbeing = wellbeing - 5;
+    		console.log("wellbeing decay", wellbeing);
+    			// console.log("current wellbeing", wellbeing
+    		// simulation.checkWellbeing(wellbeing);
     	},
     	//1 is happy, 2 is decent, 3 is depressed, 4 is very depressed
     	checkWellbeing: function(wellbeing) {
@@ -98,7 +108,7 @@
 	    			// console.log("very depressed");
 	    			return 4;
 	    	} else {
-	    		console.log("Wellbeing low, restart");
+	    		location.reload();
 	    	}
     	},
 
