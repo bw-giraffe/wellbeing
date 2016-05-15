@@ -1,6 +1,6 @@
 <h1>Be Well</h1>
 
-<div id="player"></div>
+<div id="player" data-status="true"></div>
 
 <script>
 
@@ -9,7 +9,7 @@
         player = new YT.Player('player', {
           height: '400',
           width: '600',
-          videoId: 'Ki-fATpXa00', //starting video
+          videoId: 'EKymvBM6Udc', //starting video
           playerVars: {
           	'autoplay': 0,
           	'controls': 0,
@@ -26,16 +26,31 @@
 
   // autoplay video
     function onPlayerReady(event) {
-    	$('.ytp-watermark yt-uix-sessionlink').remove();
+    	// $('.ytp-watermark yt-uix-sessionlink').remove();
         event.target.playVideo();
     }
 
 
-	function onPlayerStateChange(event) {        
-        if(event.data === 0) {            
-            alert('done');
-        }
-    }
+	function onPlayerStateChange(event) {  
+		console.log("event data", event.data);      
+		//if video ends
+			// check wellbeing
+			//determine wellbeing level
+			//grab random status video with that level
+			//
+
+
+        if(event.data === 0) {  
+        	console.log("done playing");
+        	var statusLevel = 2;
+        	// var statusLevel = simulation.checkWellbeing(wellbeing);
+        	statVideoRequest(statusLevel);
+        	//ajax request    
+        	
+        	//this is what loads a new video
+        	player.loadVideoById("BU6dAAfg-qk");
+   		 }
+   	}
 
 
 
@@ -47,37 +62,38 @@
 
     var simulation = {
     	
-    	'timeAmt': 10000,
+    	'timeAmt': 3000,
 
     	begin: function() {
 
     	},
 
     	wellbeingDecay: function() {
-    		console.log("checking the wellbeing, y'all");
+    		// console.log("checking the wellbeing, y'all");
     		interval = setTimeout(simulation.wellbeingDecay, simulation.timeAmt);
     		if(interrupt) {
     			wellbeing = wellbeing - 1;
+    			// console.log("current wellbeing", wellbeing);
     		}
-    		console.log("current wellbeing", wellbeing);
+    		simulation.checkWellbeing(wellbeing);
     	},
-
+    	//1 is happy, 2 is decent, 3 is depressed, 4 is very depressed
     	checkWellbeing: function(wellbeing) {
 	    	//if its between 75 and 100 = happy
 	    	if(wellbeing >= 75 && wellbeing <= 100) {
-					//statVideoRequest
-					console.log("happy");		
+					// console.log("happy");
+					return 1;	
 	    	} else if(wellbeing >= 50 && wellbeing <= 74) {
-	    			//statVideoRequest
-	    			console.log("decent");
+	    			// console.log("decent");
+	    			return 2;
 	    	} else if(wellbeing >= 25 && wellbeing <= 49) {
-	    			//statVideoRequest
-	    			console.log("depressed");
+	    			// console.log("depressed");
+	    			return 3;
 	    	} else if(wellbeing >= 1 && wellbeing <= 24) {
-	    			//statVideoRequest
-	    			console.log("very depressed");
+	    			// console.log("very depressed");
+	    			return 4;
 	    	} else {
-	    		alert("Wellbeing low, restart");
+	    		console.log("Wellbeing low, restart");
 	    	}
     	},
 
@@ -93,6 +109,7 @@
     				console.log("interrupt", interrupt);
     				interrupt = true;
     				console.log("interrupt", interrupt);
+    				//increment wellbeing
     				break;
     			//W
     			case 87:
@@ -102,6 +119,7 @@
     				interrupt = true;
     				console.log("interrupt", interrupt)
     				break;
+    				//increment wellbeing
     			//E
     			case 69:
     				console.log("Discipline");
@@ -110,6 +128,7 @@
     				interrupt = true;
     				console.log("interrupt", interrupt)
     				break;
+    				//decrement wellbeing
     			//R
     			case 82:
     				console.log("Entertain");
@@ -118,6 +137,7 @@
     				interrupt = true;
     				console.log("interrupt", interrupt)
     				break;
+    				//randomize wellbeing for decrement or implement
     			default:
     				console.log("That's another key bruh");
     			}
@@ -139,19 +159,6 @@
     
 	//timer -- 
 	//but needs to be disabled during actionVideo plays
-	function timerChecker(current, last) {
-		//if 5 minutes has elapsed (30s for testing)
-			//decrement wellBeing by 1
-		
-
-		//if specialOption is false  and more 20 minutes has elapsed
-			//record that time in a var
-			//enable special input option
-		//if specialOption is true and more than 20 minutes elapse
-			//check recorded time since last
-			//if it's been 20 minutes
-				//disable
-	}
 
 	//pull in all action urls at the beginning? that way you don't have to keep making a request 
 
@@ -191,23 +198,29 @@
 			//enable timer checker again
 	}
 
+	//interrupt false
+	//get action video
+	//
 
-	function checkWellBeing(wellBeing) {
-		//if its between 75 and 100 = happy
-			//statVideoRequest
-		//if its between 50 and 74 = decent
-			//statVideoRequest
-		//if its between 25 and 49 = depressed
-			//statVideoRequest
-		//if its between 1 and 24 = very depressed
-			//statVideoRequest
-		//if its less than zero = restart
-			//reload the page?
-	}
 
 	function statVideoRequest(level) {
 		//makes ajax requests to server for a new level
 		//returns random video with correct actionType
+		$.ajax({
+			type: "GET",
+			url: "statuses",
+			dataType: "json",
+			data: {
+				statusLevel: level
+			}, 
+			success: function (res) {
+				console.log("SUCCESS", res);
+
+			},
+			error: function (err) {
+				console.log("ERROR", err);
+			}
+		});
 	}
 
 	function actVideoRequest(actionType) {

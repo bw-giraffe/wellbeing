@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   root to: "homepage#home"
 
   get 'homepage', to: 'homepage#home', as: "home"
+
+  get 'statuses', to: 'statuses#random', as: "status"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
