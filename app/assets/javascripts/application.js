@@ -17,31 +17,37 @@
 
 $( document ).ready(function() {
 	console.log("Sanity check");
+
  });
 
-	var player;
-    function onYouTubePlayerAPIReady() {
-        player = new YT.Player('player', {
-          height: '400',
-          width: '600',
-          videoId: '05-o80xRHQQ',
-          events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
-          }
-        });
-    }
 
-  // autoplay video
-    function onPlayerReady(event) {
-        event.target.playVideo();
-    }
+// 	$('#fart').on("click", function(e) {
+// 		console.log("YOU CLICKED THIS");
+		
+// 	});
+// 	var player;
+//     function onYouTubePlayerAPIReady() {
+//         player = new YT.Player('player', {
+//           height: '400',
+//           width: '600',
+//           videoId: '05-o80xRHQQ',
+//           events: {
+//             'onReady': onPlayerReady,
+//             'onStateChange': onPlayerStateChange
+//           }
+//         });
+//     }
+
+//   // autoplay video
+//     function onPlayerReady(event) {
+//         event.target.playVideo();
+//     }
 
 
-	function onPlayerStateChange(event) {        
-        if(event.data === 0) {            
-            alert('done');
-        }
-    }
+// 	function onPlayerStateChange(event) {        
+//         if(event.data === 0) {            
+//             alert('done');
+//         }
+//     }
     
-//
+// //

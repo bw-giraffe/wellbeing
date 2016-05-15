@@ -2,3 +2,117 @@
 
 <div id="player"></div>
 
+<script>
+	var player;
+    function onYouTubePlayerAPIReady() {
+        player = new YT.Player('player', {
+          height: '400',
+          width: '600',
+          videoId: 'Ki-fATpXa00', //starting video
+          playerVars: {
+          	'autoplay': 0,
+          	'controls': 0,
+          	// 'modestbranding': 0,
+          	'rel': 0,
+          	'showinfo': 0
+          },
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+    }
+
+  // autoplay video
+    function onPlayerReady(event) {
+    	$('.ytp-watermark yt-uix-sessionlink').remove();
+        event.target.playVideo();
+    }
+
+
+	function onPlayerStateChange(event) {        
+        if(event.data === 0) {            
+            alert('done');
+        }
+    }
+    
+	//timer -- 
+	//but needs to be disabled during actionVideo plays
+	function timerChecker(current, last) {
+		//if 5 minutes has elapsed (30s for testing)
+			//decrement wellBeing by 1
+		
+
+		//if specialOption is false  and more 20 minutes has elapsed
+			//record that time in a var
+			//enable special input option
+		//if specialOption is true and more than 20 minutes elapse
+			//check recorded time since last
+			//if it's been 20 minutes
+				//disable
+	}
+
+	//pull in all action urls at the beginning? that way you don't have to keep making a request 
+
+	// 
+	function detectInput() {
+		//if x key
+			//disable timerChecker
+			//interruption disable
+			//decrement wellbeing
+			//get action video
+			//playvideo
+			//checkwellbeing
+			//enable timer checker again
+		//if y key
+			//disable timerChecker
+			//interruption disable
+			//decrement wellbeing
+			//get action video
+			//playvideo
+			//checkwellbeing
+			//enable timer checker again
+		//if l key
+			//disable timerChecker
+			//interruption disable
+			//decrement wellbeing
+			//get action video
+			//playvideo
+			//checkwellbeing
+			//enable timer checker again
+		//if j key
+			//disable timerChecker
+			//interruption disable
+			//decrement wellbeing
+			//get action video
+			//playvideo
+			//checkwellbeing
+			//enable timer checker again
+	}
+
+
+	function checkWellBeing(wellBeing) {
+		//if its between 75 and 100 = happy
+			//statVideoRequest
+		//if its between 50 and 74 = decent
+			//statVideoRequest
+		//if its between 25 and 49 = depressed
+			//statVideoRequest
+		//if its between 1 and 24 = very depressed
+			//statVideoRequest
+		//if its less than zero = restart
+			//reload the page?
+	}
+
+	function statVideoRequest(level) {
+		//makes ajax requests to server for a new level
+		//returns random video with correct actionType
+	}
+
+	function actVideoRequest(actionType) {
+		//makes an ajax request to server for a new action video
+		//returns random video with correct actionType
+
+	}
+
+</script>
