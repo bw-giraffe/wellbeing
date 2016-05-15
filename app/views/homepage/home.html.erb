@@ -125,6 +125,7 @@
     				console.log("interrupt", interrupt);
     				interrupt = true;
     				console.log("interrupt", interrupt);
+    				player.loadVideoById('vxpYUATrIrQ');
     				//increment wellbeing
     				break;
     			//W
@@ -179,9 +180,36 @@
 	//pull in all action urls at the beginning? that way you don't have to keep making a request 
 
 	// 
+	$.ajax({
+				type: "GET",
+				url: "statuses",
+				dataType: "json",
+				data: {
+					statusLevel: 2
+				}, 
+				success: function (res) {
+					console.log("SUCCESS", res);
+					var url = res["url"]
+					player.loadVideoById(url);
+				},
+				error: function (err) {
+					console.log("ERROR", err);
+				}
+			});
 	function detectInput() {
 		//if x key
 			//disable timerChecker
+			interrupt = false;
+			$.ajax({
+				type: "GET",
+				url: "actions",
+				dataType: "json",
+				data: {
+					
+				}
+
+
+			})
 			//interruption disable
 			//decrement wellbeing
 			//get action video
