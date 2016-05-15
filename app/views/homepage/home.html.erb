@@ -3,6 +3,7 @@
 <div id="player"></div>
 
 <script>
+
 	var player;
     function onYouTubePlayerAPIReady() {
         player = new YT.Player('player', {
@@ -35,6 +36,106 @@
             alert('done');
         }
     }
+
+
+
+    // var timeAmt = 30000;
+    // var interval = setTimeout(simulation.checkInterval, timeAmt);
+
+    var wellbeing = 100;
+    var interrupt = true;
+
+    var simulation = {
+    	
+    	'timeAmt': 10000,
+
+    	begin: function() {
+
+    	},
+
+    	wellbeingDecay: function() {
+    		console.log("checking the wellbeing, y'all");
+    		interval = setTimeout(simulation.wellbeingDecay, simulation.timeAmt);
+    		if(interrupt) {
+    			wellbeing = wellbeing - 1;
+    		}
+    		console.log("current wellbeing", wellbeing);
+    	},
+
+    	checkWellbeing: function(wellbeing) {
+	    	//if its between 75 and 100 = happy
+	    	if(wellbeing >= 75 && wellbeing <= 100) {
+					//statVideoRequest
+					console.log("happy");		
+	    	} else if(wellbeing >= 50 && wellbeing <= 74) {
+	    			//statVideoRequest
+	    			console.log("decent");
+	    	} else if(wellbeing >= 25 && wellbeing <= 49) {
+	    			//statVideoRequest
+	    			console.log("depressed");
+	    	} else if(wellbeing >= 1 && wellbeing <= 24) {
+	    			//statVideoRequest
+	    			console.log("very depressed");
+	    	} else {
+	    		alert("Wellbeing low, restart");
+	    	}
+    	},
+
+    	detectInput: function() {
+    		$(document).on("keydown", function (e) {
+
+    			var key = e.which;
+    			switch(key) {
+    			//Q
+    			case 81:
+    				console.log("Feed");
+    				interrupt = false;
+    				console.log("interrupt", interrupt);
+    				interrupt = true;
+    				console.log("interrupt", interrupt);
+    				break;
+    			//W
+    			case 87:
+    				console.log("Encourage");
+    				interrupt = false;
+    				console.log("interrupt", interrupt);
+    				interrupt = true;
+    				console.log("interrupt", interrupt)
+    				break;
+    			//E
+    			case 69:
+    				console.log("Discipline");
+    				interrupt = false;
+    				console.log("interrupt", interrupt);
+    				interrupt = true;
+    				console.log("interrupt", interrupt)
+    				break;
+    			//R
+    			case 82:
+    				console.log("Entertain");
+    				interrupt = false;
+    				console.log("interrupt", interrupt);
+    				interrupt = true;
+    				console.log("interrupt", interrupt)
+    				break;
+    			default:
+    				console.log("That's another key bruh");
+    			}
+    		});
+    	}, 
+
+
+
+    };
+
+
+    var interval = setTimeout(simulation.wellbeingDecay(), simulation.timeAmt);
+
+    simulation.detectInput();
+
+    console.log("testval", simulation.testval);
+
+
     
 	//timer -- 
 	//but needs to be disabled during actionVideo plays
@@ -74,7 +175,7 @@
 			//enable timer checker again
 		//if l key
 			//disable timerChecker
-			//interruption disable
+			//interruption enable
 			//decrement wellbeing
 			//get action video
 			//playvideo
