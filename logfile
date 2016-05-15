@@ -1,0 +1,5 @@
+LOG:  database system was shut down at 2016-05-14 15:40:17 PDT
+LOG:  MultiXact member wraparound protections are now enabled
+LOG:  autovacuum launcher started
+LOG:  database system is ready to accept connections
+FATAL:  database "contourz_development" does not exist
