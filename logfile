@@ -3,3 +3,18 @@ LOG:  MultiXact member wraparound protections are now enabled
 LOG:  autovacuum launcher started
 LOG:  database system is ready to accept connections
 FATAL:  database "contourz_development" does not exist
+ERROR:  column statuses.type does not exist at character 44
+STATEMENT:  SELECT  "statuses".* FROM "statuses" WHERE "statuses"."type" = 'H'  ORDER BY RANDOM() LIMIT 1
+ERROR:  column statuses.type does not exist at character 44
+STATEMENT:  SELECT  "statuses".* FROM "statuses" WHERE "statuses"."type" = 'H'  ORDER BY RANDOM() LIMIT 1
+ERROR:  column statuses.type does not exist at character 44
+STATEMENT:  SELECT  "statuses".* FROM "statuses" WHERE "statuses"."type" = 'H'  ORDER BY RANDOM() LIMIT 1
+ERROR:  column statuses.type does not exist at character 44
+STATEMENT:  SELECT  "statuses".* FROM "statuses" WHERE "statuses"."type" = 'H'  ORDER BY RANDOM() LIMIT 1
+ERROR:  column statuses.type does not exist at character 44
+STATEMENT:  SELECT  "statuses".* FROM "statuses" WHERE "statuses"."type" = 'H'  ORDER BY RANDOM() LIMIT 1
+ERROR:  column statuses.type does not exist at character 44
+STATEMENT:  SELECT  "statuses".* FROM "statuses" WHERE "statuses"."type" = 'H'  ORDER BY RANDOM() LIMIT 1
+ERROR:  database "wellbeing_development" is being accessed by other users
+DETAIL:  There is 1 other session using the database.
+STATEMENT:  DROP DATABASE IF EXISTS "wellbeing_development"

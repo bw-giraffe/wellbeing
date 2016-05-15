@@ -32,53 +32,42 @@
 
 
 	function onPlayerStateChange(event) {  
-		console.log("event data", event.data);      
-		//if video ends
-			// check wellbeing
-			//determine wellbeing level
-			//grab random status video with that level
-			//
-
+		// console.log("event data", event.data);      
 
         if(event.data === 0) {  
         	console.log("done playing");
-        	var statusLevel = 2;
-        	// var statusLevel = simulation.checkWellbeing(wellbeing);
-        	// var newUrl = statVideoRequest(statusLevel);
+        	var lvl = simulation.checkWellbeing(wellbeing);
+        	console.log("lvl", lvl);
         	// //ajax request   
-        	$.ajax({
-				type: "GET",
-				url: "statuses",
-				dataType: "json",
-				data: {
-					statusLevel: 2
-				}, 
-				success: function (res) {
-					console.log("SUCCESS", res);
-					var url = res["url"]
-					player.loadVideoById(url);
-				},
-				error: function (err) {
-					console.log("ERROR", err);
-				}
-			});
+	        	$.ajax({
+					type: "GET",
+					url: "statuses",
+					dataType: "json",
+					data: {
+						statusLevel: lvl
+					}, 
+					success: function (res) {
+						// console.log("SUCCESS", res);
+						var url = res["url"]
+						player.loadVideoById(url);
+					},
+					error: function (err) {
+						alert("ERROR", err["status"]);
+					}
+				});
         	// console.log("newUrl", newUrl); 
         	// player.loadVideoById(newUrl);
         	//this is what loads a new video
    		 }
+
    	}
 
-
-
-    // var timeAmt = 30000;
-    // var interval = setTimeout(simulation.checkInterval, timeAmt);
-
-    var wellbeing = 100;
+    var wellbeing = 80;
     var interrupt = true;
 
     var simulation = {
     	
-    	'timeAmt': 3000,
+    	'timeAmt': 150000,
 
     	begin: function() {
 
@@ -88,7 +77,7 @@
     		// console.log("checking the wellbeing, y'all");
     		interval = setTimeout(simulation.wellbeingDecay, simulation.timeAmt);
     		if(interrupt) {
-    			wellbeing = wellbeing - 1;
+    			wellbeing = wellbeing - 5;
     			// console.log("current wellbeing", wellbeing);
     		}
     		simulation.checkWellbeing(wellbeing);
@@ -96,7 +85,7 @@
     	//1 is happy, 2 is decent, 3 is depressed, 4 is very depressed
     	checkWellbeing: function(wellbeing) {
 	    	//if its between 75 and 100 = happy
-	    	if(wellbeing >= 75 && wellbeing <= 100) {
+	    	if(wellbeing >= 75) {
 					// console.log("happy");
 					return 1;	
 	    	} else if(wellbeing >= 50 && wellbeing <= 74) {
@@ -114,164 +103,84 @@
     	},
 
     	detectInput: function() {
-    		$(document).on("keydown", function (e) {
-
-    			var key = e.which;
-    			switch(key) {
-    			//Q
-    			case 81:
-    				console.log("Feed");
-    				interrupt = false;
-    				console.log("interrupt", interrupt);
-    				interrupt = true;
-    				console.log("interrupt", interrupt);
-    				player.loadVideoById('vxpYUATrIrQ');
-    				//increment wellbeing
-    				break;
-    			//W
-    			case 87:
-    				console.log("Encourage");
-    				interrupt = false;
-    				console.log("interrupt", interrupt);
-    				interrupt = true;
-    				console.log("interrupt", interrupt)
-    				break;
-    				//increment wellbeing
-    			//E
-    			case 69:
-    				console.log("Discipline");
-    				interrupt = false;
-    				console.log("interrupt", interrupt);
-    				interrupt = true;
-    				console.log("interrupt", interrupt)
-    				break;
-    				//decrement wellbeing
-    			//R
-    			case 82:
-    				console.log("Entertain");
-    				interrupt = false;
-    				console.log("interrupt", interrupt);
-    				interrupt = true;
-    				console.log("interrupt", interrupt)
-    				break;
-    				//randomize wellbeing for decrement or implement
-    			default:
-    				console.log("That's another key bruh");
+	    	$(document).on("keydown", function (e) {
+    			function getAction(type) {
+    				// interrupt = false;
+    				// console.log("interrupt", interrupt);
+					$.ajax({
+						type: "GET",
+						url: "actions",
+						dataType: "json",
+						data: {
+							actionType: type
+						},
+						success: function(res) {
+							console.log("SUCCESS RETRIEVING ACTION", res);
+							var url = res["url"];
+							player.loadVideoById(url);
+							// interrupt = true;
+						},
+						error: function (err) {
+							console.log("ERROR", err);
+							// interrupt = true; 
+						}
+					});
     			}
-    		});
-    	}, 
+    			
 
-
-
+	    			var key = e.which;
+	    			switch(key) {
+	    			//Q
+	    			case 81:
+	    				console.log("Feed");
+	    				wellbeing = wellbeing + 5;
+	    				getAction("F");
+	    				break;
+	    			//W
+	    			case 87:
+	    				console.log("Encourage");
+	    				wellbeing = wellbeing + 4;
+	    				getAction("E");
+	    				break;
+	    				//increment wellbeing
+	    			//E
+	    			case 69:
+	    				console.log("Discipline");
+	    				wellbeing = wellbeing - 10;
+	    				getAction("D");
+	    				break;
+	    				//decrement wellbeing
+	    			//R
+	    			case 82:
+	    				console.log("Entertain");
+	    				wellbeing = wellbeing + 4;
+	    				getAction("EN");
+	    				break;
+	    				//randomize wellbeing for decrement or implement
+	    			default:
+	    				console.log("That's another key bruh");
+	    			}
+	    		});
+			}
     };
-
 
     var interval = setTimeout(simulation.wellbeingDecay(), simulation.timeAmt);
 
     simulation.detectInput();
-
-    console.log("testval", simulation.testval);
-
-
-    
 	//timer -- 
 	//but needs to be disabled during actionVideo plays
 
 	//pull in all action urls at the beginning? that way you don't have to keep making a request 
 
-	// 
-	$.ajax({
-				type: "GET",
-				url: "statuses",
-				dataType: "json",
-				data: {
-					statusLevel: 2
-				}, 
-				success: function (res) {
-					console.log("SUCCESS", res);
-					var url = res["url"]
-					player.loadVideoById(url);
-				},
-				error: function (err) {
-					console.log("ERROR", err);
-				}
-			});
-	function detectInput() {
 		//if x key
 			//disable timerChecker
-			interrupt = false;
-			$.ajax({
-				type: "GET",
-				url: "actions",
-				dataType: "json",
-				data: {
-					
-				}
-
-
-			})
 			//interruption disable
 			//decrement wellbeing
 			//get action video
 			//playvideo
 			//checkwellbeing
 			//enable timer checker again
-		//if y key
-			//disable timerChecker
-			//interruption disable
-			//decrement wellbeing
-			//get action video
-			//playvideo
-			//checkwellbeing
-			//enable timer checker again
-		//if l key
-			//disable timerChecker
-			//interruption enable
-			//decrement wellbeing
-			//get action video
-			//playvideo
-			//checkwellbeing
-			//enable timer checker again
-		//if j key
-			//disable timerChecker
-			//interruption disable
-			//decrement wellbeing
-			//get action video
-			//playvideo
-			//checkwellbeing
-			//enable timer checker again
-	}
-
-	//interrupt false
-	//get action video
-	//
 
 
-	function statVideoRequest(level) {
-		//makes ajax requests to server for a new level
-		//returns random video with correct actionType
-		$.ajax({
-			type: "GET",
-			url: "statuses",
-			dataType: "json",
-			data: {
-				statusLevel: level
-			}, 
-			success: function (res) {
-				console.log("SUCCESS", res);
-				var url = res["url"]
-				return url;
-			},
-			error: function (err) {
-				console.log("ERROR", err);
-			}
-		});
-	}
-
-	function actVideoRequest(actionType) {
-		//makes an ajax request to server for a new action video
-		//returns random video with correct actionType
-
-	}
 
 </script>
