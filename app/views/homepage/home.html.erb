@@ -7,8 +7,12 @@
 	display: inline-block;
 
 }
+.center-block {
+	margin-left: 300px;
+}
+
 </style>
-<div class="container">
+<div class="container-fluid">
 	<div class= "row">
 		<div class="col-xs-12" style="text-align: center;">
 			<h1>Be Well</h1>
@@ -16,31 +20,33 @@
 	</div>
 	<div class= "row">
 		<div class="col-xs-2">
+		<img src="https://googledrive.com/host/0ByjOIZ473FwvTUNOM012NmdIRHM/Well-Being-shock.png">
 		<br>
 		<br>
+		<img src="https://googledrive.com/host/0ByjOIZ473FwvTUNOM012NmdIRHM/Well-Being-entertain.png">
 		<br>
 		<br>
+		<img src="https://googledrive.com/host/0ByjOIZ473FwvTUNOM012NmdIRHM/Well-Being-Feed.png">
+		<br>
+		<br>
+		<img src="https://image.freepik.com/free-icon/thumbs-up_318-85977.png" width="100" height="100">
 		</div>
 		<div class="col-xs-8">
 			<div id="outer">
 				<div id="player" data-status="true"></div>
 			</div>
 		</div>
-		<div class="col-xs-2">
-		<br>
-		<br>
-		<br>
-		<br>
-		</div>
 	</div>
 	<div class="row">
 		<div class="col-xs-12">
-			<div id="chart_div"></div>
+			<div id="chart_div" class="center-block"></div>
 		</div>
 	</div>
 </div>
 
 <script>
+
+
 	var player;
     function onYouTubePlayerAPIReady() {
         player = new YT.Player('player', {
@@ -59,6 +65,7 @@
             'onStateChange': onPlayerStateChange
           }
         });
+        google.charts.setOnLoadCallback(drawRightY(100));
     }
 
   // autoplay video
@@ -75,7 +82,7 @@
         	console.log("done playing");
         	console.log("YOUR WELLBEING IS ", wellbeing);
         	var lvl = simulation.checkWellbeing(wellbeing);
-        	google.charts.setOnLoadCallback(drawRightY(wellbeing));
+
         	console.log("lvl", lvl);
         	// //ajax request   
 	        	$.ajax({
