@@ -12,8 +12,8 @@
 <div id="outer">
 	<div id="player" data-status="true"></div>
 </div>
+<div id="chart_div"></div>
 <script>
-
 	var player;
     function onYouTubePlayerAPIReady() {
         player = new YT.Player('player', {
@@ -48,6 +48,7 @@
         	console.log("done playing");
         	console.log("YOUR WELLBEING IS ", wellbeing);
         	var lvl = simulation.checkWellbeing(wellbeing);
+        	google.charts.setOnLoadCallback(drawRightY(wellbeing));
         	console.log("lvl", lvl);
         	// //ajax request   
 	        	$.ajax({
@@ -105,6 +106,7 @@
 	    			// console.log("very depressed");
 	    			return 4;
 	    	} else {
+	    		alert("YOU HAVE KILLED YOUR BELOVED PET.");
 	    		location.reload();
 	    	}
     	},
@@ -174,5 +176,23 @@
     var interval = setTimeout(simulation.wellbeingDecay(), simulation.timeAmt);
 
     simulation.detectInput();
+
+   	google.charts.load('current', {packages: ['corechart', 'bar']});
+
+
+	function drawRightY(wellbeing) {
+      var data = google.visualization.arrayToDataTable([
+       ['Wellbeing', 'Level', { role: 'interval' } ],
+        ['Wellbeing', wellbeing, 'color: red']
+      ]);
+
+      var options = {
+      	width: 600, 
+      	height: 125, 
+      	bars: 'horizontal'
+      };
+      var material = new google.charts.Bar(document.getElementById('chart_div'));
+      material.draw(data, options);
+    }
 
 </script>

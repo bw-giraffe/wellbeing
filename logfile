@@ -18,3 +18,4 @@ STATEMENT:  SELECT  "statuses".* FROM "statuses" WHERE "statuses"."type" = 'H'  
 ERROR:  database "wellbeing_development" is being accessed by other users
 DETAIL:  There is 1 other session using the database.
 STATEMENT:  DROP DATABASE IF EXISTS "wellbeing_development"
+LOG:  using stale statistics instead of current ones because stats collector is not responding
