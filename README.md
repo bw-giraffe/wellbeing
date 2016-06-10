@@ -18,8 +18,10 @@ Our idea came out out of-- you guessed it-- Tamgagotchi. But another part of it 
 
 In order to make our the experience voyeuristic but also interactive we decided to make a box that users could peer into and engage with their newfound human pet. 
 
-We filmed approximately 40 to 50 short videos of different emotional states, as well as our characters reactions to different kinds of input. We decided to limit the selection of actions a user could take to just four. This was so we could simplify the simulation of the character's emotional states, as well as realizing only had one weekend to put something together. 
+We filmed approximately 40 to 50 short videos of different emotional states, as well as our characters reactions to different kinds of input. We decided to limit the selection of actions a user could take to just four--encourage, feed, punish, entertain. This was mostly due to the time constraint but also to simplify the simualtion of the character's emotional state. 
 
 We thought it would be a good idea to make this a web application, instead of a standalone exhibit. This way people could play with it online.
-We used the Youtube Player API to show the progression of our character's emotional state over time. Initially we did not have the icons and wellbeing stat bar that are on the application today. 
+We used the Youtube Player API to show the progression of our character's emotional state over time. Initially we did not have the icons and wellbeing stat bar that are visible today. Our goal was to just get it working and to display the videos inside of a box. 
+
+There is a natural decay to the character's emotional wellbeing over time, however different actions taken will make it go up or down. When a video finishes playing, we check the wellbeing level and randomly grab a corresponding video (assigned to that level) using an API request with AJAX. The same structure is applied to action videos. Some actions have more than one video, so when we receive input a request is made the action video API and is returned. We could have used an Amazon Web Services bucket for the videos, but our concern was again...time, and Youtube ultimately won out because of its awesome Player API, and reliable hosting. In the future we might switch over to AWS because there are some aesthic issues with the Youtube Player, and honestly it's a good excuse to learn how to store and serve videos on a cloud service. 
 
