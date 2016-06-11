@@ -1,5 +1,7 @@
 # WellBeing
 
+### [Application Here] (http://w3ll-b3ing.herokuapp.com/)
+
 ## By: [Jason Anaya] (http://www.jasonanaya.com/about/index.htm), [Michael Emono] (https://www.linkedin.com/in/michael-emono-145a02aa), [Rich Rizzo] (http://www.richrizzo.com)
 
 #Overview
@@ -34,7 +36,7 @@ This was an incredibly fun project to work on, and I liked seeing what we could 
 #PHOTOS AND VIDEO
 Please check out some photos in video of the box in action.
 
-[Media Here] (https://www.dropbox.com/sh/43mq52q1rylnnzi/AACdtlbcwsIFZKvQ5Q8rfl8_a?dl=0) 
+### [Media Here] (https://www.dropbox.com/sh/43mq52q1rylnnzi/AACdtlbcwsIFZKvQ5Q8rfl8_a?dl=0) 
 
 
 
