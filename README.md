@@ -28,7 +28,7 @@ There is a natural decay to the character's emotional wellbeing over time, howev
 Isn't cardboard a fantastic material? 
 ![image of box] (https://www.dropbox.com/s/f5vnropbqcw2che/IMG_2440.JPG?raw=1)
 
-![side buttons] (https://www.dropbox.com/s/8pvj4g0qvevmsgi/IMG_2441.JPG?raw=1)
+![side buttons] (https://www.dropbox.com/s/zd8pqye3x7xiab7/IMG_2442.JPG?dl=01)
 
 
 
