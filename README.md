@@ -1,6 +1,6 @@
 # WellBeing
 
-## By: Jason Anaya, Michael Emono, Rich Rizzo
+## By: [Jason Anaya] (http://www.jasonanaya.com/about/index.htm), [Michael Emono] (https://www.linkedin.com/in/michael-emono-145a02aa), [Rich Rizzo] (www.richrizzo.com)
 
 #Overview
 
@@ -26,9 +26,9 @@ We used the Youtube Player API to show the progression of our character's emotio
 There is a natural decay to the character's emotional wellbeing over time, however different actions taken will make it go up or down. When a video finishes playing, we check the wellbeing level and randomly grab a corresponding video (assigned to that level) using an API request with AJAX. The same structure is applied to action videos. Some actions have more than one video, so when we receive input a request is made the action video API and is returned. We could have used an Amazon Web Services bucket for the videos, but our concern was again...time, and Youtube ultimately won out because of its awesome Player API, and reliable hosting. In the future we might switch over to AWS because there are some aesthic issues with the Youtube Player, and honestly it's a good excuse to learn how to store and serve videos on a cloud service.
 
 Isn't cardboard a fantastic material? 
-![image of box] (https://www.dropbox.com/s/f5vnropbqcw2che/IMG_2440.JPG)
+![image of box] (https://www.dropbox.com/s/f5vnropbqcw2che/IMG_2440.JPG?raw=1)
 
-![side buttons] (https://www.dropbox.com/s/zd8pqye3x7xiab7/IMG_2442.JPG?dl=01)
+![side buttons] (https://www.dropbox.com/s/8pvj4g0qvevmsgi/IMG_2441.JPG?raw=1)
 
 
 
